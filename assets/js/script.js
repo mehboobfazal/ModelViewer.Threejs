@@ -55,12 +55,12 @@ mtlLoader.load(
                 scene.add(object);
             },
             function (xhr) {
-                if (xhr.loaded === xhr.total) {
+                if (xhr.loaded >= xhr.total) {
                     console.log("Object loaded");
                     loadingScreenEle.style.display = "none";
                     loadingScreenProgressEle.value = 0;
                 } else {
-                    loadingScreenProgressEle.value = (xhr.loaded / xhr.total) * 100;
+                    loadingScreenProgressEle.value = parseInt((xhr.loaded / xhr.total) * 100);
                 }
             },
             function (error) {
