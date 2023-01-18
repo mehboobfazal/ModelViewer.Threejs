@@ -18,16 +18,20 @@ scene.add(light);
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.set(0, 0, 20);
 
-const listener = new THREE.AudioListener();
-camera.add(listener);
-const sound = new THREE.Audio(listener);
-const audioLoader = new THREE.AudioLoader();
-audioLoader.load("./assets/models/dhokra/a-small-miracle-132333.mp3", function (buffer) {
-    sound.setBuffer(buffer);
-    sound.setLoop(true);
-    sound.setVolume(0.5);
-    sound.play();
-});
+const playAudio = () => {
+    const listener = new THREE.AudioListener();
+    camera.add(listener);
+    const audio = new THREE.Audio(listener);
+    const audioLoader = new THREE.AudioLoader();
+    audioLoader.load("./assets/models/dhokra/a-small-miracle-132333.mp3", function (buffer) {
+        audio.setBuffer(buffer);
+        audio.setLoop(true);
+        audio.setVolume(0.5);
+        audio.play();
+    });
+    document.body.removeEventListener("click", playAudio);
+}
+document.body.addEventListener("click", playAudio);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
